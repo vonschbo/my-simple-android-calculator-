@@ -52,7 +52,8 @@
         android:text="Edit"
         android:id="@+id/button_edit"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="edit"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -61,5 +62,6 @@
         android:id="@+id/button_save"
         android:layout_alignParentTop="true"
         android:layout_alignRight="@+id/editText_title"
-        android:layout_alignEnd="@+id/editText_title" />
+        android:layout_alignEnd="@+id/editText_title"
+        android:onClick="save"/>
 </RelativeLayout>
