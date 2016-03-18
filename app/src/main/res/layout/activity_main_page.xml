@@ -9,4 +9,57 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.bo.comp6442_assignment_1_2016.MainPage">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:id="@+id/textView_title"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="56dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contents"
+        android:id="@+id/textView_contents"
+        android:layout_below="@+id/editText_title"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText_title"
+        android:text="Please enter the title"
+        android:layout_below="@+id/textView_title"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/editText_contents"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:text="Please enter the contents here"
+        android:layout_below="@+id/textView_contents" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit"
+        android:id="@+id/button_edit"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:id="@+id/button_save"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/editText_title"
+        android:layout_alignEnd="@+id/editText_title" />
 </RelativeLayout>
