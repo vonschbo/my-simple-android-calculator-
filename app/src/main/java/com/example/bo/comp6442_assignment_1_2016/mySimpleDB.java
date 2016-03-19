@@ -1,5 +1,6 @@
 package com.example.bo.comp6442_assignment_1_2016;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -15,7 +16,7 @@ public class mySimpleDB extends SQLiteOpenHelper{
 
     //Constants for identifying table and columns
     public static final String TABLE_NOTES = "notes";
-    public static final String NOTE_ID = "_id";
+    public static final String NOTE_ID = "id";
     public static final String NOTE_TEXT = "noteText";
     public static final String NOTE_CREATED = "noteCreated";
 
@@ -31,18 +32,32 @@ public class mySimpleDB extends SQLiteOpenHelper{
 
 
     public mySimpleDB(Context context) {
+
         super(context, DATABASE_NAME,null,DATABASE_VERSION);
+
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(TABLE_CREATE);
+        db.execSQL("create table "+ TABLE_CREATE + " (IDINTEGER PRIMARY KEY AUTOINCREMENT, noteText text,notecreated time)");
     }
 
     //drop the table and re-create it
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-    db.execSQL("DROP TABLE IF EXISTS" + TABLE_NOTES);
+        db.execSQL("DROP TABLE IF EXISTS" + TABLE_NOTES);
         onCreate(db);
+    }
+
+    public boolean insertData(String text,String time){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues =  new ContentValues();
+        contentValues.put(NOTE_TEXT, text);
+        contentValues.put(NOTE_CREATED, time);
+        long result = db.insert(TABLE_NOTES,null,contentValues);
+        if(result==-1)
+            return false;
+        else
+            return true;
     }
 }
