@@ -15,8 +15,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainPage"
-    android:parentActivityName=".MainActivity" />
+        <provider
+            android:authorities="com.example.bo.comp6442_assignment_1_2016.notesprovider"
+            android:name=".NotesProvider"
+            android:exported="false" />
     </application>
 
 </manifest>
