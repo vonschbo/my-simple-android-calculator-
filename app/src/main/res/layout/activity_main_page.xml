@@ -32,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/editText_title"
-        android:text="Please enter the title"
+        android:hint="Please enter the title"
         android:layout_below="@+id/textView_title"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -43,7 +43,8 @@
         android:id="@+id/editText_contents"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:text="Please enter the contents here"
+        android:hint="Please enter the contents here"
+
         android:layout_below="@+id/textView_contents" />
 
     <Button

@@ -13,6 +13,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class MainPage extends AppCompatActivity {
@@ -71,7 +72,20 @@ public class MainPage extends AppCompatActivity {
 
 
     public void edit(View view){
+    try{
+        String text;
+        FileInputStream fileInputStream = openFileInput(this.filename);
+        InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
+        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+        StringBuffer stringBuffer = new StringBuffer();
+        while ((text = bufferedReader.readLine())!=null){
+            stringBuffer.append(text+"\n");
+        }
+        textEnteredContent.setText(stringBuffer.toString());
 
+    }catch (Exception e){
+        e.printStackTrace();
+    }
     }
 
 //    public void delete(View view){
