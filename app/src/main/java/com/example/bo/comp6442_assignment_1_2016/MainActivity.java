@@ -1,30 +1,22 @@
 package com.example.bo.comp6442_assignment_1_2016;
 
-import android.annotation.TargetApi;
-import android.app.AlertDialog;
+import android.app.LoaderManager;
 import android.content.ContentValues;
-import android.content.Context;
-import android.content.Intent;
+import android.content.CursorLoader;
+import android.content.Loader;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
-import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-import android.widget.Toast;
 
-import java.util.ArrayList;
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
+    CursorAdapter cursorAdapter;
     mySimpleDB myDb;
     EditText editid,edittext,edittime;
     Button adda;
@@ -33,19 +25,22 @@ public class MainActivity extends AppCompatActivity {
     Button btnDelete;
 
 
-        @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+
         @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
             insertNode("New note");
-        Cursor cursor = getContentResolver().query(NotesProvider.CONTENT_URI, mySimpleDB.ALL_COLUMNS, null, null, null, null);
+
         String[] from = {mySimpleDB.NOTE_TEXT};
             int[] to = {android.R.id.text1};
-            CursorAdapter cursorAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, cursor, from, to, 0);
+
+            cursorAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, null, from, to, 0);
 
             ListView list = (ListView)findViewById(android.R.id.list);
             list.setAdapter(cursorAdapter);
+
+            getLoaderManager().initLoader(0,null,this);
 
 
 
@@ -78,6 +73,21 @@ public class MainActivity extends AppCompatActivity {
         values.put(mySimpleDB.NOTE_TEXT, noteText);
         Uri noteUri = getContentResolver().insert(NotesProvider.CONTENT_URI, values);
         Log.d("MainActivity", "Inserted note " + noteUri.getLastPathSegment());
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return new CursorLoader(this, NotesProvider.CONTENT_URI, null, null, null, null);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        cursorAdapter.swapCursor(data);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        cursorAdapter.swapCursor(null);
     }
 
 //    public void addad(View view){
