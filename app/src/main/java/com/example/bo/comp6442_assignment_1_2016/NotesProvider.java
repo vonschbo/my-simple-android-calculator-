@@ -21,6 +21,7 @@ public class NotesProvider extends ContentProvider {
     private static final int NOTES = 1;
     private static final int NOTES_ID = 2;
 
+    //show action
     private static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
@@ -33,7 +34,7 @@ public class NotesProvider extends ContentProvider {
     @Override
     public boolean onCreate() {
         mySimpleDB myDB = new mySimpleDB(getContext());
-        SQLiteDatabase database = myDB.getWritableDatabase();
+        database = myDB.getWritableDatabase();
         return true;
     }
 
@@ -41,7 +42,7 @@ public class NotesProvider extends ContentProvider {
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         return database.query(mySimpleDB.TABLE_NOTES,mySimpleDB.ALL_COLUMNS,selection,null,null,null,
-                mySimpleDB.NOTE_CREATED + "Descending");
+                mySimpleDB.NOTE_CREATED + " DESC");
     }
 
     @Nullable
@@ -53,17 +54,17 @@ public class NotesProvider extends ContentProvider {
     @Nullable
     @Override
     public Uri insert(Uri uri, ContentValues values) {
-        long id = database.insert(mySimpleDB.TABLE_NOTES,null,values);
+        long id = database.insert(mySimpleDB.TABLE_NOTES, null, values);
         return Uri.parse(BASE_PATH + "/" + id);
     }
 
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
-        return database.delete(mySimpleDB.TABLE_NOTES,selection,selectionArgs);
+        return database.delete(mySimpleDB.TABLE_NOTES, selection, selectionArgs);
     }
 
     @Override
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
-        return database.update(mySimpleDB.TABLE_NOTES,values,selection,selectionArgs);
+        return database.update(mySimpleDB.TABLE_NOTES, values, selection, selectionArgs);
     }
 }

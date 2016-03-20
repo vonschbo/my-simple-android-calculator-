@@ -15,9 +15,10 @@ public class mySimpleDB extends SQLiteOpenHelper{
     private static final String DATABASE_NAME = "notes.db";
     private static final int DATABASE_VERSION = 1;
 
-    //Constants for identifying table and columns
+    //Constants for identifying table
     public static final String TABLE_NOTES = "notes";
-    public static final String NOTE_ID = "id";
+    //Three columns
+    public static final String NOTE_ID = "_id";
     public static final String NOTE_TEXT = "noteText";
     public static final String NOTE_CREATED = "noteCreated";
 
@@ -40,7 +41,7 @@ public class mySimpleDB extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_CREATE + " (IDINTEGER PRIMARY KEY AUTOINCREMENT, noteText text,notecreated time)");
+        db.execSQL(TABLE_CREATE);
     }
 
     //drop the table and re-create it
@@ -50,36 +51,36 @@ public class mySimpleDB extends SQLiteOpenHelper{
         onCreate(db);
     }
 
-    public boolean insertData(String text,String time){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues =  new ContentValues();
-        contentValues.put(NOTE_TEXT, text);
-        contentValues.put(NOTE_CREATED, time);
-        long result = db.insert(TABLE_NOTES,null,contentValues);
-        if(result==-1)
-            return false;
-        else
-            return true;
-    }
+//    public boolean insertData(String text,String time){
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        ContentValues contentValues =  new ContentValues();
+//        contentValues.put(NOTE_TEXT, text);
+//        contentValues.put(NOTE_CREATED, time);
+//        long result = db.insert(TABLE_NOTES,null,contentValues);
+//        if(result==-1)
+//            return false;
+//        else
+//            return true;
+//    }
 //provide read-write access to the result
-    public Cursor getAllData(){
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select * from "+ TABLE_NOTES,null);
-        return res;
-    }
+//    public Cursor getAllData(){
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        Cursor res = db.rawQuery("select * from "+ TABLE_NOTES,null);
+//        return res;
+//    }
 
-    public boolean updataData(String id, String text, String time){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues =  new ContentValues();
-        contentValues.put(NOTE_ID, id);
-        contentValues.put(NOTE_TEXT, text);
-        contentValues.put(NOTE_CREATED, time);
-        db.update(TABLE_NOTES,contentValues,"id=?", new String[] {id});
-        return true;
-    }
+//    public boolean updataData(String id, String text, String time){
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        ContentValues contentValues =  new ContentValues();
+//        contentValues.put(NOTE_ID, id);
+//        contentValues.put(NOTE_TEXT, text);
+//        contentValues.put(NOTE_CREATED, time);
+//        db.update(TABLE_NOTES,contentValues,"id=?", new String[] {id});
+//        return true;
+//    }
 
-    public Integer deleteData(String id){
-        SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(TABLE_NOTES,"id = ?",new String[]{id});
-    }
+//    public Integer deleteData(String id){
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        return db.delete(TABLE_NOTES,"id = ?",new String[]{id});
+//    }
 }
