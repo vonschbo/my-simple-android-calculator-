@@ -2,6 +2,7 @@ package com.example.bo.comp6442_assignment_1_2016;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -39,7 +40,7 @@ public class mySimpleDB extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table "+ TABLE_CREATE + " (IDINTEGER PRIMARY KEY AUTOINCREMENT, noteText text,notecreated time)");
+        db.execSQL("create table " + TABLE_CREATE + " (IDINTEGER PRIMARY KEY AUTOINCREMENT, noteText text,notecreated time)");
     }
 
     //drop the table and re-create it
@@ -59,5 +60,26 @@ public class mySimpleDB extends SQLiteOpenHelper{
             return false;
         else
             return true;
+    }
+//provide read-write access to the result
+    public Cursor getAllData(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select * from "+ TABLE_NOTES,null);
+        return res;
+    }
+
+    public boolean updataData(String id, String text, String time){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues =  new ContentValues();
+        contentValues.put(NOTE_ID, id);
+        contentValues.put(NOTE_TEXT, text);
+        contentValues.put(NOTE_CREATED, time);
+        db.update(TABLE_NOTES,contentValues,"id=?", new String[] {id});
+        return true;
+    }
+
+    public Integer deleteData(String id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(TABLE_NOTES,"id = ?",new String[]{id});
     }
 }
