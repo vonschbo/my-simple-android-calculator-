@@ -12,7 +12,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class mySimpleDB extends SQLiteOpenHelper{
 
     //Constants for db name and version
-    private static final String DATABASE_NAME = "notes.db";
+    private static final String DATABASE_NAME = "MyNotes.db";
     private static final int DATABASE_VERSION = 1;
 
     //Constants for identifying table
