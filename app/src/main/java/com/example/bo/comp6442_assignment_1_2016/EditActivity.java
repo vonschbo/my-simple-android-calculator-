@@ -21,8 +21,10 @@ public class EditActivity extends AppCompatActivity {
     private String action;
 
     private EditText editor;
+
     // a where clause in SQL statement
     private String noteFilter;
+
     //contain the existing text
     private String oldText;
 
@@ -67,7 +69,7 @@ public class EditActivity extends AppCompatActivity {
 //                        .setAction("Action", null).show();
 //            }
 //        });
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
