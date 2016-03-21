@@ -134,6 +134,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         restartLoader();
     }
 
+    //restarts the loader from the loader manager and refills the data from the database and displays it in the list
     private void restartLoader() {
         getLoaderManager().restartLoader(0, null, this);
     }
@@ -155,10 +156,17 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     public void createNewNote(View view){
         Intent intent = new Intent(this, EditActivity.class);
-        startActivityForResult(intent,Create_New_Note);
+        startActivityForResult(intent, Create_New_Note);
     }
 
-//    public void addad(View view){
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == Create_New_Note && resultCode == RESULT_OK){
+            restartLoader();
+        }
+    }
+
+    //    public void addad(View view){
 //        boolean insertData = myDb.insertData(edittext.getText().toString(), edittime.getText().toString());
 //        if(insertData ==true){
 //            Toast.makeText(MainActivity.this,"Data Inserted",Toast.LENGTH_LONG).show();
