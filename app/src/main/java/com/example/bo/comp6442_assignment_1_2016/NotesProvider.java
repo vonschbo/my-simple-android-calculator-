@@ -43,6 +43,11 @@ public class NotesProvider extends ContentProvider {
     @Nullable
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+
+        if(uriMatcher.match(uri)==NOTES_ID){
+            selection = mySimpleDB.NOTE_ID + "=" + uri.getLastPathSegment();
+
+        }
         return database.query(mySimpleDB.TABLE_NOTES,mySimpleDB.ALL_COLUMNS,selection,null,null,null,
                 mySimpleDB.NOTE_CREATED + " DESC");
     }

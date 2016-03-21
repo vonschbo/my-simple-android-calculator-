@@ -2,6 +2,7 @@ package com.example.bo.comp6442_assignment_1_2016;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class EditActivity extends AppCompatActivity {
 
@@ -19,6 +21,10 @@ public class EditActivity extends AppCompatActivity {
     private String action;
 
     private EditText editor;
+    // a where clause in SQL statement
+    private String noteFilter;
+    //contain the existing text
+    private String oldText;
 
 
     @Override
@@ -37,24 +43,39 @@ public class EditActivity extends AppCompatActivity {
         if(uri == null){
             action = Intent.ACTION_INSERT;
             setTitle(getString(R.string.new_note));
+        }else {
+            action = Intent.ACTION_EDIT;
+            noteFilter = mySimpleDB.NOTE_ID +"=" + uri.getLastPathSegment();
+
+            Cursor cursor = getContentResolver().query(uri, mySimpleDB.ALL_COLUMNS, noteFilter, null, null);
+            //move to the one and the only row, get the selected note
+            cursor.moveToFirst();
+            oldText = cursor.getString(cursor.getColumnIndex(mySimpleDB.NOTE_TEXT));
+            editor.setText(oldText);
+            //move the cursor to the end of existing text
+            editor.requestFocus();
+
         }
 
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.menu_edit, menu);
+        if(action.equals(Intent.ACTION_EDIT)){
+            getMenuInflater().inflate(R.menu.menu_edit, menu);
+        }
+//        getMenuInflater().inflate(R.menu.menu_edit, menu);
         return true;
     }
 
@@ -66,9 +87,20 @@ public class EditActivity extends AppCompatActivity {
             case android.R.id.home:
                 finishEdit();
                 break;
+            case R.id.action_delete:
+                deleteNote();
+                break;
         }
         return true;
 
+    }
+
+    //delete the note from db
+    private void deleteNote() {
+        getContentResolver().delete(NotesProvider.CONTENT_URI, noteFilter, null);
+        Toast.makeText(this, R.string.note_deleted,Toast.LENGTH_SHORT).show();
+        setResult(RESULT_OK);
+        finish();
     }
 
     //to save the persistent note
@@ -81,13 +113,32 @@ public class EditActivity extends AppCompatActivity {
                     setResult(RESULT_CANCELED);
                 }else {
                     insertNote(newText);
+                }break;
+            case Intent.ACTION_EDIT:
+                if(newText.length()==0){
+                    deleteNote();
+
+                }else if(oldText.equals(newText)){
+                    setResult(RESULT_CANCELED);
+                }else {
+                    updateNote(newText);
                 }
         }finish();
+    }
+
+    //update the content in database
+    private void updateNote(String noteText) {
+        ContentValues values = new ContentValues();
+        values.put(mySimpleDB.NOTE_TEXT, noteText);
+        getContentResolver().update(NotesProvider.CONTENT_URI, values, noteFilter, null);
+        Toast.makeText(this, R.string.note_updated, Toast.LENGTH_SHORT).show();
+        setResult(RESULT_OK);
     }
 
     //create the new note
     private void insertNote(String noteText) {
 
+        //create the value object, and put text into it,update the database
         ContentValues values = new ContentValues();
         values.put(mySimpleDB.NOTE_TEXT, noteText);
         getContentResolver().insert(NotesProvider.CONTENT_URI, values);

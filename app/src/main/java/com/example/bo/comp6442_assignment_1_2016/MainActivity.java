@@ -15,11 +15,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.AdapterView;
 import android.widget.CursorAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
@@ -48,6 +46,16 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
             ListView list = (ListView)findViewById(android.R.id.list);
             list.setAdapter(cursorAdapter);
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MainActivity.this, EditActivity.class);
+                Uri uri = Uri.parse(NotesProvider.CONTENT_URI + "/" + id);
+                intent.putExtra(NotesProvider.Content_Item_Type, uri);
+                startActivityForResult(intent, Create_New_Note);
+            }
+        });
 
             getLoaderManager().initLoader(0,null,this);
 
