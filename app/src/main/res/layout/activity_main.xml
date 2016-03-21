@@ -15,4 +15,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"></ListView>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Note"
+        android:id="@+id/button_new"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="createNewNote"/>
+
 </RelativeLayout>
