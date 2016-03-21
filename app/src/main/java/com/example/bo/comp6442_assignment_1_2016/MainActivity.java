@@ -21,7 +21,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
-    CursorAdapter cursorAdapter;
+   private CursorAdapter cursorAdapter;
     mySimpleDB myDb;
     EditText editid,edittext,edittime;
     Button adda;
@@ -37,11 +37,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         setContentView(R.layout.activity_main);
 //            insertNode("New note");
 
-        String[] from = {mySimpleDB.NOTE_TEXT};
+//        String[] from = {mySimpleDB.NOTE_TEXT};
             //int[] to = {android.R.id.text1};
-            int[] to = {R.id.tvNote};
+//            int[] to = {R.id.tvNote};
 
-            cursorAdapter = new SimpleCursorAdapter(this, R.layout.note_list_item, null, from, to, 0);
+            //cursorAdapter = new SimpleCursorAdapter(this, R.layout.note_list_item, null, from, to, 0);
+            cursorAdapter = new MyNotesCursorAdapter(this, null,0);
 
             ListView list = (ListView)findViewById(android.R.id.list);
             list.setAdapter(cursorAdapter);

@@ -15,10 +15,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <provider
-            android:authorities="com.example.bo.comp6442_assignment_1_2016.notesprovider"
             android:name=".NotesProvider"
+            android:authorities="com.example.bo.comp6442_assignment_1_2016.notesprovider"
             android:exported="false" />
+
+        <activity
+            android:name=".EditActivity"
+            android:label="@string/title_activity_edit"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.bo.comp6442_assignment_1_2016.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
