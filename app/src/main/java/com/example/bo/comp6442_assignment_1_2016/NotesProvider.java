@@ -11,6 +11,9 @@ import android.support.annotation.Nullable;
 /**
  * Created by Bo on 19/03/2016.
  */
+
+//content provider as the mid layer from UI to database deal with requests
+    //use uri to access the content
 public class NotesProvider extends ContentProvider {
 
     private static final String AUTHORITY = "com.example.bo.comp6442_assignment_1_2016.notesprovider";
@@ -21,7 +24,7 @@ public class NotesProvider extends ContentProvider {
     private static final int NOTES = 1;
     private static final int NOTES_ID = 2;
 
-    //show action
+    //show action, initialize the uri
     private static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
     public static final String Content_Item_Type = "Note";
@@ -40,6 +43,7 @@ public class NotesProvider extends ContentProvider {
         return true;
     }
 
+    //use queries to do the operation, a Cursor object
     @Nullable
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {

@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+//this is the edittext page, to create, edit and delete note
 public class EditActivity extends AppCompatActivity {
 
     //to know what is doing
