@@ -9,6 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 /**
  * Created by Bo on 19/03/2016.
  */
+
+//create the database
 public class mySimpleDB extends SQLiteOpenHelper{
 
     //Constants for db name and version

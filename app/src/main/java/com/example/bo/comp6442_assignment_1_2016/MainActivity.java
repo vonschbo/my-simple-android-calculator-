@@ -20,6 +20,8 @@ import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+//the structure of this project is refer to http://www.lynda.com/Android-tutorials
+
 //mani page, use listview to show all the existing notes
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
    private CursorAdapter cursorAdapter;
@@ -131,6 +133,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                     }
                 };
 
+        // prompt an alert
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(getString(R.string.are_you_sure))
                 .setPositiveButton(getString(android.R.string.yes), dialogClickListener)
@@ -138,6 +141,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 .show();
     }
 
+    //can create sample notes from the menu bar
     private void insertSampleData() {
         insertNode("Simple note");
         insertNode("Multi-line\nnote");
