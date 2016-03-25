@@ -13,5 +13,7 @@ public class NotesProviderTest extends TestCase {
 
         assertEquals(NotesProvider.Content_Item_Type, "Note");
         assertEquals(NotesProvider.CONTENT_URI, Uri.parse("content://com.example.bo.comp6442_assignment_1_2016.notesprovider/notes"));
+
+
     }
 }

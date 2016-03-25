@@ -19,18 +19,22 @@ public class MyNotesCursorAdapter extends CursorAdapter{
         super(context, c, flags);
     }
 
+    //the View will be created based on the layout defined the list item
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
         return LayoutInflater.from(context).inflate(R.layout.note_list_item, parent,false);
 
     }
 
+    //When bind the view, it will receive an instance of the cursor object,
+    // and it will already point to the particular row of the database that's supposed to be displayed.
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
 
+        //the text of note to display
         String noteText = cursor.getString(cursor.getColumnIndex(mySimpleDB.NOTE_TEXT));
 
-        //10 is ASC2 value of a line feed character
+        //position, 10 is ASC2 value of a line feed character, reset the note text
         int pos = noteText.indexOf(10);
         if(pos != -1){
             noteText = noteText.substring(0, pos) + " ...";

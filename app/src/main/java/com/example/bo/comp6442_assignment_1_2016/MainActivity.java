@@ -20,9 +20,12 @@ import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-//the structure of this project is refer to http://www.lynda.com/Android-tutorials
+//the structure of this project is refer to http://www.lynda.com/Android-tutorials,Building a Note-Taking App for Android
 
-//mani page, use listview to show all the existing notes
+//added the list view and cursor adaptor to display the data,
+// the content provider to manage the data, and finally,
+// the loader to handle everything at the front end asynchronously.
+//main page, use listview to show all the existing notes, CursorLoader to maintain the content when rotate the screen
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
    private CursorAdapter cursorAdapter;
 //    mySimpleDB myDb;
@@ -60,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             }
         });
 
+        //initialize the loader
             getLoaderManager().initLoader(0,null,this);
 
 
@@ -154,16 +158,20 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         getLoaderManager().restartLoader(0, null, this);
     }
 
+    //called when data is needed from contentprovider
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         return new CursorLoader(this, NotesProvider.CONTENT_URI, null, null, null, null);
     }
 
+    //When create the cursor loader object it executes the Query method on the background thread.
+    //And when the data comes back, Onload Finished is called.
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         cursorAdapter.swapCursor(data);
     }
 
+    //wiped out data
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         cursorAdapter.swapCursor(null);
