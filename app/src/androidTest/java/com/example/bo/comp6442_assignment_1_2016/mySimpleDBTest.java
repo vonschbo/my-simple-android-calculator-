@@ -1,5 +1,7 @@
 package com.example.bo.comp6442_assignment_1_2016;
 
+import android.content.ContentValues;
+import android.net.Uri;
 import android.test.AndroidTestCase;
 import android.test.RenamingDelegatingContext;
 
@@ -24,9 +26,11 @@ public class mySimpleDBTest extends AndroidTestCase {
         assertFalse(mySimpleDB.NOTE_TEXT == "text");
         assertEquals(mySimpleDB.NOTE_TEXT, "noteText");
         assertFalse(mySimpleDB.NOTE_CREATED == "oteCreated");
-        assertTrue(mySimpleDB.NOTE_CREATED=="noteCreated");
+        assertTrue(mySimpleDB.NOTE_CREATED == "noteCreated");
         assertTrue(db.getDatabaseName()=="MyNotes.db");
     }
+
+
 
     public void tearDown() throws Exception {
         db.close();
