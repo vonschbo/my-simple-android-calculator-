@@ -25,6 +25,7 @@ public class mySimpleDBTest extends AndroidTestCase {
         assertEquals(mySimpleDB.NOTE_TEXT, "noteText");
         assertFalse(mySimpleDB.NOTE_CREATED == "oteCreated");
         assertTrue(mySimpleDB.NOTE_CREATED=="noteCreated");
+        assertTrue(db.getDatabaseName()=="MyNotes.db");
     }
 
     public void tearDown() throws Exception {
