@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     }
 
+    //insert new note
     private void insertNode(String noteText) {
         ContentValues values = new ContentValues();
         values.put(mySimpleDB.NOTE_TEXT, noteText);
@@ -86,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         Log.d("MainActivity", "Inserted note " + noteUri.getLastPathSegment());
     }
 
+    //menu setting
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
