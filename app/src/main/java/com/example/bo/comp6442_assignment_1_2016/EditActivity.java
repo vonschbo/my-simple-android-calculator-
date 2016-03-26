@@ -14,7 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
+//refer to the http://www.lynda.com/Android-tutorials,Building a Note-Taking App for Android
 //this is the edittext page, to create, edit and delete note
 public class EditActivity extends AppCompatActivity {
 
