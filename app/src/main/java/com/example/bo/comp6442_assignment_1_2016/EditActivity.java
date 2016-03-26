@@ -42,7 +42,7 @@ public class EditActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Uri uri = intent.getParcelableExtra(NotesProvider.Content_Item_Type);
 
-        //that means I am creating a new note
+        //set the title of EditActivity that means I am creating a new note or not
         if(uri == null){
             action = Intent.ACTION_INSERT;
             setTitle(getString(R.string.new_note));
@@ -50,6 +50,7 @@ public class EditActivity extends AppCompatActivity {
             action = Intent.ACTION_EDIT;
             noteFilter = mySimpleDB.NOTE_ID +"=" + uri.getLastPathSegment();
 
+            //retrieve from database
             Cursor cursor = getContentResolver().query(uri, mySimpleDB.ALL_COLUMNS, noteFilter, null, null);
             //move to the one and the only row, get the selected note
             cursor.moveToFirst();
@@ -82,6 +83,7 @@ public class EditActivity extends AppCompatActivity {
         return true;
     }
 
+    //the menu option
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
@@ -117,10 +119,13 @@ public class EditActivity extends AppCompatActivity {
                 }else {
                     insertNote(newText);
                 }break;
+
+            //if the user delete the note
             case Intent.ACTION_EDIT:
                 if(newText.length()==0){
                     deleteNote();
 
+                    //if user not change the note, remain the same
                 }else if(oldText.equals(newText)){
                     setResult(RESULT_CANCELED);
                 }else {
@@ -129,7 +134,7 @@ public class EditActivity extends AppCompatActivity {
         }finish();
     }
 
-    //update the content in database
+    //update the content in database, make sure only update the selected row
     private void updateNote(String noteText) {
         ContentValues values = new ContentValues();
         values.put(mySimpleDB.NOTE_TEXT, noteText);

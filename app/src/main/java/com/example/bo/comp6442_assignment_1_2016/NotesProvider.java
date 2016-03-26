@@ -53,6 +53,7 @@ public class NotesProvider extends ContentProvider {
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
 
+        //return the use selected note,return a single note
         if(uriMatcher.match(uri)==NOTES_ID){
             selection = mySimpleDB.NOTE_ID + "=" + uri.getLastPathSegment();
 

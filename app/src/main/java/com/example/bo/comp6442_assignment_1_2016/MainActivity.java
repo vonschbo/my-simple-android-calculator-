@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             ListView list = (ListView)findViewById(android.R.id.list);
             list.setAdapter(cursorAdapter);
 
+        //allow the use select note, get the id primary key
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -182,6 +183,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         startActivityForResult(intent, Create_New_Note);
     }
 
+    //press the back to return to the mainActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == Create_New_Note && resultCode == RESULT_OK){
