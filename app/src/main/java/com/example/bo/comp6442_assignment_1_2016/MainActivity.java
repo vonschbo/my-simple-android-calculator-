@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -117,11 +118,15 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             case R.id.action_delete_all:
                 deleteAllNotes();
                 break;
+            case R.id.action_add_newNote:
+                menuNewNote();
+                break;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    //delete all the notes in the first page
     private void deleteAllNotes() {
         DialogInterface.OnClickListener dialogClickListener =
                 new DialogInterface.OnClickListener() {
@@ -179,7 +184,14 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         cursorAdapter.swapCursor(null);
     }
 
+    //use button create new note
     public void createNewNote(View view){
+        Intent intent = new Intent(this, EditActivity.class);
+        startActivityForResult(intent, Create_New_Note);
+    }
+
+    //use menu create new note
+    public void menuNewNote(){
         Intent intent = new Intent(this, EditActivity.class);
         startActivityForResult(intent, Create_New_Note);
     }
