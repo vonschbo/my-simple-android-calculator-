@@ -154,7 +154,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         restartLoader();
     }
 
-    //restarts the loader from the loader manager and refills the data from the database and displays it in the list
+    //restarts the loader from the loader manager and
+    // refills the data from the database and displays it in the list
     private void restartLoader() {
         getLoaderManager().restartLoader(0, null, this);
     }

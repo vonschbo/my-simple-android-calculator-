@@ -95,6 +95,9 @@ public class EditActivity extends AppCompatActivity {
             case R.id.action_delete:
                 deleteNote();
                 break;
+            case R.id.action_menu_save:
+                finishEdit();
+                break;
         }
         return true;
 
