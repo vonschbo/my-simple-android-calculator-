@@ -21,7 +21,11 @@ import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-//the structure of this project is refer to http://www.lynda.com/Android-tutorials,Building a Note-Taking App for Android
+/**
+ * @author Bo
+ * reference: the whole structure of this project is refer to http://www.lynda.com/Android-tutorials,Building a Note-Taking App for Android
+    I make some modification on my own oversion, but mostly, the codes is referenced to this link http://www.lynda.com/Android-tutorials/Welcome/377485/406750-4.html
+ */
 
 //added the list view and cursor adaptor to display the data,
 // the content provider to manage the data, and finally,
