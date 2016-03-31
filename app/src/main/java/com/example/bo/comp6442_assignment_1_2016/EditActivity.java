@@ -9,12 +9,20 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-//refer to the http://www.lynda.com/Android-tutorials,Building a Note-Taking App for Android
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+/**
+ * @author Bo
+ * Refer to the tutorial http://www.lynda.com/Android-tutorials//
+ */
 //this is the edittext page, to create, edit and delete note
 public class EditActivity extends AppCompatActivity {
 
@@ -134,6 +142,14 @@ public class EditActivity extends AppCompatActivity {
                 }else {
                     updateNote(newText);
                 }
+
+                //modification
+//                java.text.DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+//                Calendar cal = Calendar.getInstance();
+//            if(newText.contains("insertdate"));
+//                String newString = newText.replace("insertdate", dateFormat.format(cal.getTime()));
+//                editor.setText(newString);
+
         }finish();
     }
 

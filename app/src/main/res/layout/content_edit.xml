@@ -9,6 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:id = "@+id/relative_edit"
     tools:context="com.example.bo.comp6442_assignment_1_2016.EditActivity"
     tools:showIn="@layout/activity_edit">
 

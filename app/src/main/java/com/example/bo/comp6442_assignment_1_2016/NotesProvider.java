@@ -9,7 +9,7 @@ import android.net.Uri;
 import android.support.annotation.Nullable;
 
 /**
- * Created by Bo on 19/03/2016.
+ * @author Bo
  * Refer to the tutorial http://www.lynda.com/Android-tutorials/Managing-database-content-provider/
  */
 

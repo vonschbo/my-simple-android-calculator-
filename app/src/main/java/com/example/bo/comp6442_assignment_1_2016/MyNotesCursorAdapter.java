@@ -9,9 +9,9 @@ import android.widget.CursorAdapter;
 import android.widget.TextView;
 
 /**
- * Created by Bo on 21/03/2016.
+ * @author Bo
+ * Refer to the tutorial http://www.lynda.com/Android-tutorials//
  */
-
 //to display dynamically instead of simpleCursorAdapter,
     //handle nodes that have line feeds
 public class MyNotesCursorAdapter extends CursorAdapter{
